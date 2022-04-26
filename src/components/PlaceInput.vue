@@ -36,6 +36,7 @@ import { ref, defineEmits } from 'vue'
 import { accuWeatherService } from '@/services'
 import { useWeatherStore } from '@/store'
 import { useDebounce } from '@/composables/useDebounce'
+import { IPlace } from '@/types'
 const { currentPlace } = useWeatherStore()
 
 const $emit = defineEmits(['selected'])
@@ -43,9 +44,9 @@ const $emit = defineEmits(['selected'])
 const inputRef = ref<HTMLInputElement>()
 const query = ref(currentPlace.value?.LocalizedName || 'Tel Aviv')
 const loading = ref(false)
-const places = ref<any[]>([])
+const places = ref<IPlace[]>([])
 
-function onSelectPlace (place: any) {
+function onSelectPlace (place: IPlace) {
   inputRef.value?.focus()
   $emit('selected', place)
   query.value = place.LocalizedName

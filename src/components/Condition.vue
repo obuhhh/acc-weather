@@ -19,11 +19,12 @@
 import { computed, defineProps } from 'vue'
 import { useWeatherStore } from '@/store'
 import { useAccuWeatherIcon } from '@/composables/useAccuWeatherIcon'
+import { ICondition } from '@/types'
 
 const { units } = useWeatherStore()
 
 const props = defineProps<{
-  condition: any
+  condition: ICondition
 }>()
 
 const icon = computed(() => useAccuWeatherIcon(props.condition.WeatherIcon))

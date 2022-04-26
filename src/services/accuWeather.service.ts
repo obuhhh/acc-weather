@@ -5,7 +5,7 @@ import { ICondition, IForecast, IPlace } from '@/types'
 const { saveCondition, saveForecast, units } = useWeatherStore()
 
 class AccuWeatherService {
-  async autocomplete (q: string): Promise<any[]> {
+  async autocomplete (q: string): Promise<IPlace[]> {
     return $axios.get<void, IPlace[]>('/locations/v1/cities/autocomplete', { params: { q } })
 
     // return new Promise<IPlace[]>(resolve => {
@@ -13,7 +13,7 @@ class AccuWeatherService {
     // })
   }
 
-  async currentConditions (key: string): Promise<any> {
+  async currentConditions (key: string): Promise<ICondition> {
     return $axios.get<void, ICondition[]>(`/currentconditions/v1/${key}`, {
       params: {
         details: true,
@@ -32,7 +32,7 @@ class AccuWeatherService {
     // })
   }
 
-  async forecast (key: string) {
+  async forecast (key: string): Promise<IForecast> {
     return $axios.get<void, IForecast>(`/forecasts/v1/daily/5day/${key}`, {
       params: {
         metric: units.value === 'Metric',

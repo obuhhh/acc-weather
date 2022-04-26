@@ -14,7 +14,3 @@ import { useWeatherStore } from '@/store'
 
 const { units, toggleUnits } = useWeatherStore()
 </script>
-
-<style scoped>
-
-</style>
